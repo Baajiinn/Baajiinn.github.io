@@ -1,3 +1,4 @@
+/* Police Importé */
 .exo-2-normal {
     font-family: "Exo 2", sans-serif;
     font-optical-sizing: auto;
@@ -13,77 +14,91 @@
     margin: 0;
     top: 0;
     left: 0;
-    color: white;
     box-sizing: border-box;
 }
-
-html, body {
+html {
     background: #121c2b !important;
+    color: white;
 }
-
 header {
+    justify-content: center;
     display: flex;
-    padding: 40px 100px;
+    padding: 20px 0px;
     align-items: flex-start;
     gap: 30px;
 }
-
 header img {
     border-radius: 5px;
-    max-width: 200px;
+    max-width: 250px;
 }
-
+/* Effet zoom-in zoom-out */
+header img:hover{
+    width: 300px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+header img:not(:hover){
+    max-width: 250px;
+    transition: 0.3s ease-in-out;
+}
 .header h1 {
     font-size: 45px;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 5px;
 }
-
 .header p {
     font-size: 18px;
     margin-bottom: 20px;
 }
-
 .sousHeader {
     display: flex;
     gap: 20px;
 }
-
 .sousHeader p {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 10px 20px;
     font-size: 14px;
 }
-
 h2 {
-    text-align: center;
-    font-size: 24px;
-    margin: 20px 0;
+    margin: 10px 0;
     text-transform: uppercase;
 }
+h3{
+    margin: 10px 0;
+    text-transform: uppercase; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+h3 img{
+    width: 32px;
+    height: 32px;
+}
 .coordonnees{
+    text-align: center;
     background-color: #182232;
-    padding: 20px;
+    padding: 10px;
+    
 }
 .coordoneesContainer {
     display: flex;
-    justify-content: space-evenly;
-    padding: 0 100px;
+    justify-content: center;
+    gap: 50px;
+    padding: 0 20px;
     align-items: center;
 }
-
 .coordoneesContainer a {
+    color: white;
     display: flex;
     align-items: center;
     text-decoration: none;
     gap: 10px;
 }
-
 .coordoneesContainer img {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
 }
 .col1{
     display: flex;
@@ -97,5 +112,153 @@ h2 {
 .col3 {
     display: flex;
     gap: 15px;
+}
+.infosContainer{
+    margin: 100px 0px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.infosContainer a{
+    text-decoration: none;
+    color: #e74c3c;
+}
+.infosContainer a:hover{
+    transition: 0.2s;
+    color: #f1948a;
+}
+
+/* Colonne de gauche */
+.leftColumn{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 25%;
+}
+.formation div{
+    margin-top: 20px;
+}
+.formation div p{
+    text-justify:distribute-all-lines;
+}
+.travauxPersonnels div{
+    margin-top: 20px;
+}
+.experiences div{
+    margin-top: 20px;
+}
+
+/* Colonne de droite */
+.rightColumn{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 25%;
+}
+.competences div{
+    margin-top: 20px;
+}
+.competences meter {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    margin: 5px 0;
+}
+.competences meter::-webkit-meter-bar {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.competences meter::-webkit-meter-optimum-value {
+    background: #e74c3c; /* The color you requested */
+    border-radius: 10px;
+}
+
+/* For Firefox */
+.competences meter::-moz-meter-bar {
+    background: #e74c3c;
+}
+.langues div{
+    display: flex;
+    gap: 20px;
+}
+.langues p{
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    width: auto;
+    text-align: center;
+    text-transform: uppercase;
+}
+.centres div{
+    display: flex;
+    gap: 20px;
+}
+.centres div div{
+    display: flex;
     flex-direction: column;
 }
+.centres div p{
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    width: auto;
+    text-align: center;
+    text-transform: uppercase;
+}
+/* Plugin trouvé sur Stack overflow :  https://stackoverflow.com/questions/56917493/how-to-keep-the-inner-square-in-a-infinite-rotation */
+.child1 {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    top: 200px; /* Ajout de l'unité */
+    left: -50px;
+    background-color: #e74c3c;
+    border: 1px solid #e74c3c;
+    animation: rotating 35s linear infinite;
+    z-index: -1; /* Pour s'assurer qu'il est bien visible */
+}
+.borderchild1 {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    top: 200px; /* Ajout de l'unité */
+    left: -20px;
+    bottom: 20px;
+    border: 1px solid #e74c3c;
+    animation: rotating 35s linear infinite;
+    z-index: -2; /* Pour s'assurer qu'il est bien visible */
+}
+.child2 {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    top: 700px; /* Ajout de l'unité */
+    left: 95%;
+    background-color: #e74c3c;
+    border: 1px solid #e74c3c;
+    animation: rotating 35s linear infinite;
+    z-index: -1; /* Pour s'assurer qu'il est bien visible */
+}
+.borderchild2 {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    top: 700px; /* Ajout de l'unité */
+    left: 92%;
+    bottom: 20px;
+    border: 1px solid #e74c3c;
+    animation: rotating 35s linear infinite;
+    z-index: -2; /* Pour s'assurer qu'il est bien visible */
+}
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
