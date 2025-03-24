@@ -31,6 +31,14 @@ img{
     left: 95%;
     top: 20px;
   }
+  .theme__toggle span img:hover{
+    padding: 5px;
+    transition: 0.3s;
+  }
+  .theme__toggle span img:not(:hover){
+    padding: 0px;
+    transition: 0.3s;
+  } 
   .theme__toggle > .light ,
   .theme__toggle > .dark {
     display: none;
@@ -84,26 +92,8 @@ header img {
 header img:hover{
     cursor: pointer;
 }
-
-.header h1 {
-    font-size: 45px;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-}
-.header p {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-.sousHeader {
-    display: flex;
-    gap: 20px;
-}
-.sousHeader p {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 14px;
+main{
+    z-index: 99;
 }
 h2 {
     margin: 10px 0;
@@ -120,11 +110,35 @@ h3 img{
     width: 32px;
     height: 32px;
 }
+
+.header h1 {
+    font-size: 45px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.header p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.sousHeader {
+    display: flex;
+    gap: 20px;
+}
+.sousHeader p {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
 .coordonnees{
     text-align: center;
-    background-color: #182232;
+    background-color: #182232 !important;
     padding: 10px;
-    
+    color: white !important;
+    position: relative; /* Ajout pour pouvoir appliquer un z-index */
+    z-index: 2; /* Plus grand que celui des carrés */
 }
 .coordoneesContainer {
     display: flex;
@@ -217,7 +231,7 @@ h3 img{
     margin: 5px 0;
 }
 .competences meter::-webkit-meter-bar {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1) !important;
     border-radius: 10px;
 }
 
@@ -235,7 +249,7 @@ h3 img{
     gap: 20px;
 }
 .langues p{
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1) !important;
     border-radius: 20px;
     padding: 10px 20px;
     font-size: 14px;
@@ -252,7 +266,7 @@ h3 img{
     flex-direction: column;
 }
 .centres div p{
-    background: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1) !important;
     border-radius: 20px;
     padding: 10px 20px;
     font-size: 14px;

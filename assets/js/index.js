@@ -1,0 +1,1 @@
+console.log("La hauteur totale de mon site web est de : " + document.documentElement.scrollHeight + " pixels");
