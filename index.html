@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -9,20 +9,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Plugin Dark Mode -->
+    <meta name="color-scheme" content="light dark">
+    <script type="module" src="assets/js/theme-load.js"></script>
+    <script  cript type="module" src="assets/js/theme-toggle.js"></script>
 </head>
 <body>
     <div class="child1"></div>
     <div class="borderchild1"></div>
     <div class="child2"></div>
     <div class="borderchild2"></div>
+    <theme-toggle>
+            <button class="theme__toggle" aria-label="Toggle site theme">
+                <span class="light"><img src="assets/img/soleil.png" alt="soleil" width="24"></span>
+                <span class="dark"><img src="assets/img/lune.png" alt="lune" width="24"></span>
+        </button>
+      </theme-toggle>
     <header>
-        <img src="assets/img/photo.jpg" alt="photo" width="200">
+        <img src="assets/img/photo.jpg" alt="photo">
         <div class="header">
             <h1>Esdras Lubanguku</h1>
             <p>Etudiant à la Haute école en Hainaut en cybersécurité</p>
             <div class="sousHeader">
                 <p><b>PERMIS B - VÉHICULE PERSONNEL</b></p>
-                <p><b>19 ANS</b></p>
+                <p><b>20 ANS</b></p>
             </div>
         </div>
     </header>
@@ -32,7 +42,7 @@
             <div class="coordoneesContainer">
                 <div class="col1">
                         <a href="tel:+32483644618">
-                            <img src="assets/img/telephone.png" alt="téléphone">
+                            <img src="assets/img/telephone.png" alt="téléphone" width="16">
                             <p>+32 483 64 46 18</p>
                         </a>
                         <a href="MAILTO:lubanguku.esd@gmail.com">
@@ -41,7 +51,7 @@
                         </a>
                 </div>
                 <div class="col2">
-                    <img src="assets/img/maison.png" alt="adresse" width="24">
+                    <img src="assets/img/maison.png" alt="adresse">
                     <p>20 Rue Arthur Lheureux<br>7340, COLFONTAINE</p>
                 </div>
                 <div class="col3">
@@ -158,3 +168,4 @@
 </html>
 <script src="assets/js/jquery-3.7.1.js"></script>
 <script src="assets/js/index.js"></script>
+<!-- Plugin Dark Mode -->
