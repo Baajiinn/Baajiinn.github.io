@@ -87,11 +87,36 @@ header {
 header img {
     border-radius: 5px;
     max-width: 250px;
+    z-index: 1001;
 }
 /* Indication sur effet lightbox */
 header img:hover{
     cursor: pointer;
 }
+.zoomed {
+    transform: scale(2); /* Zoom X2 */
+    transition: transform 0.3s ease-in-out;
+    transform-origin: center;
+    width: 100%;
+    z-index: 1000; /* Pour être au-dessus du reste */
+    min-width: 250px;
+    max-width: 300px;
+    min-height: 300px;
+    max-height: 500px;
+}
+.photoHolderZoomed {
+    background-color: rgba(0, 0, 0, 0.8); /* Assombrit l’arrière-plan */ 
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 250px 50px;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
 main{
     z-index: 99;
 }

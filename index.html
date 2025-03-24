@@ -16,14 +16,11 @@
 </head>
 <body>
    
-    <theme-toggle>
-            <button class="theme__toggle" aria-label="Toggle site theme">
-                <span class="light"><img src="assets/img/soleil.png" alt="soleil" width="24"></span>
-                <span class="dark"><img src="assets/img/lune.png" alt="lune" width="24"></span>
-        </button>
-      </theme-toggle>
+   
     <header>
-        <img src="assets/img/photo.jpg" alt="photo">
+        <div class="photoHolder">
+            <img src="assets/img/photo.jpg" alt="photo" id="photo" class="photo">
+        </div>
         <div class="header">
             <h1>Esdras Lubanguku</h1>
             <p>Etudiant à la Haute école en Hainaut en cybersécurité</p>
@@ -138,7 +135,7 @@
                     <h2>LANGUES</h2>
                     <div>
                         <p><b>Français - C2</b></p>
-                        <p><b>Anglais - C1</b></p>
+                        <p><b>Anglais - B2</b></p>
                     </div>
                 </section>
                 <section class="centres">
@@ -160,6 +157,12 @@
         </div>
         <!-- Plugin trouvé sur Stack overflow :  https://stackoverflow.com/questions/56917493/how-to-keep-the-inner-square-in-a-infinite-rotation -->
     </main>
+    <theme-toggle>
+        <button class="theme__toggle" aria-label="Toggle site theme">
+            <span class="light"><img src="assets/img/soleil.png" alt="soleil" width="24"></span>
+            <span class="dark"><img src="assets/img/lune.png" alt="lune" width="24"></span>
+    </button>
+  </theme-toggle>
     <div class="child1"></div>
     <div class="borderchild1"></div>
     <div class="child2"></div>
@@ -168,4 +171,3 @@
 </html>
 <script src="assets/js/jquery-3.7.1.js"></script>
 <script src="assets/js/index.js"></script>
-<!-- Plugin Dark Mode -->
