@@ -83,6 +83,7 @@ header {
     align-items: flex-start;
     gap: 30px;
     z-index: 3;
+    position: relative;
 }
 header img {
     border-radius: 5px;
@@ -119,6 +120,7 @@ header img:hover{
 
 main{
     z-index: 99;
+    position: relative;
 }
 h2 {
     margin: 10px 0;
@@ -301,6 +303,7 @@ h3 img{
 }
 /* Plugin trouvé sur Stack overflow :  https://stackoverflow.com/questions/56917493/how-to-keep-the-inner-square-in-a-infinite-rotation */
 .child1 {
+    display: inline;
     width: 200px;
     height: 200px;
     position: fixed;
@@ -312,33 +315,36 @@ h3 img{
     z-index: 1; /* Pour s'assurer qu'il est bien visible */
 }
 .borderchild1 {
+    display: inline;
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 200px; /* Ajout de l'unité */
-    left: -20px;
+    top: 195px; /* Ajout de l'unité */
+    left: 20px;
     bottom: 20px;
     border: 1px solid #e74c3c;
     animation: rotating 35s linear infinite;
     z-index: 0; /* Pour s'assurer qu'il est bien visible */
 }
 .child2 {
+    display: inline;
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 700px; /* Ajout de l'unité */
-    left: 95%;
+    top: 750px; /* Ajout de l'unité */
+    left: 90vw;
     background-color: #e74c3c;
     border: 1px solid #e74c3c;
     animation: rotating 35s linear infinite;
     z-index: 1; /* Pour s'assurer qu'il est bien visible */
 }
 .borderchild2 {
+    display: inline;
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 700px; /* Ajout de l'unité */
-    left: 92%;
+    top: 670px; /* Ajout de l'unité */
+    left: 88vw;
     bottom: 20px;
     border: 1px solid #e74c3c;
     animation: rotating 35s linear infinite;
@@ -348,7 +354,6 @@ h3 img{
     from {
       transform: rotate(0deg);
     }
-
     to {
       transform: rotate(360deg);
     }

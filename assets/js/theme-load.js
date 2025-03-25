@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Vérifie quel thème est actif
         let isDarkMode = root.classList.contains("theme__dark");
         let newTheme = isDarkMode ? "theme__light" : "theme__dark";
-
+        
         // Applique la nouvelle classe et stocke la valeur
         root.classList.remove("theme__dark", "theme__light");
         root.classList.add(newTheme);
