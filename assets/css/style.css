@@ -27,18 +27,21 @@ img{
     border-radius: 5px;
     border: 0;
     position: fixed;
-    z-index: 100;
+    z-index: 10;
     left: 95%;
     top: 20px;
+    box-shadow: 1px 3px 5px  #b45656;
+}
+.theme__toggle:hover{
+    transform: scale(1.1);
+    transition: 0.3s ;
   }
-  .theme__toggle span img:hover{
-    padding: 5px;
+  .theme__toggle:not(:hover){
+    width: 50px;
+    height: 50px;
     transition: 0.3s;
   }
-  .theme__toggle span img:not(:hover){
-    padding: 0px;
-    transition: 0.3s;
-  } 
+
   .theme__toggle > .light ,
   .theme__toggle > .dark {
     display: none;
@@ -88,7 +91,7 @@ header {
 header img {
     border-radius: 5px;
     max-width: 250px;
-    z-index: 1001;
+    z-index: 4;
 }
 /* Indication sur effet lightbox */
 header img:hover{
@@ -97,13 +100,13 @@ header img:hover{
 .zoomed {
     transform: scale(2); /* Zoom X2 */
     transition: transform 0.3s ease-in-out;
-    transform-origin: center;
     width: 100%;
     z-index: 1000; /* Pour être au-dessus du reste */
     min-width: 250px;
     max-width: 300px;
     min-height: 300px;
     max-height: 500px;
+    z-index: 5;
 }
 .photoHolderZoomed {
     background-color: rgba(0, 0, 0, 0.8); /* Assombrit l’arrière-plan */ 
@@ -115,11 +118,11 @@ header img:hover{
     padding: 250px 50px;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 4;
 }
 
 main{
-    z-index: 99;
+    z-index: 2;
     position: relative;
 }
 h2 {
@@ -236,6 +239,14 @@ h3 img{
 .travauxPersonnels div{
     margin-top: 20px;
 }
+.travauxPersonnels div div{
+    display: flex;
+    align-items: center;
+}
+.travauxPersonnels div div button{
+    background-color: #ffffff00;
+    border: 0;
+}
 .experiences div{
     margin-top: 20px;
 }
@@ -301,13 +312,108 @@ h3 img{
     text-align: center;
     text-transform: uppercase;
 }
+
+/* Bouton d'impression */
+.print-button {
+    position: fixed;
+    top: 90vh;
+    right: 20px;
+    left: 30px;
+    width: 40px;
+    height: 40px;
+    background-color: #2D2D2D;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.print-button:hover {
+    background-color: #e74c3c;
+    transform: scale(1.1);
+}
+
+.print-button img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+    
+    html, body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
+    
+    .cv-container {
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+    
+    .print-button {
+        display: none;
+    }
+    
+    #particles-js {
+        display: none;
+    }
+    
+    .sidebar {
+        padding: 15px;
+        width: 32%;
+        background-color: #2D2D2D !important;
+    }
+    
+    .main-content {
+        padding: 15px 20px;
+        width: 68%;
+    }
+    
+    .cv-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+    
+    body {
+        font-size: 11px;
+    }
+    
+    h1 {
+        font-size: 20px !important;
+    }
+    
+    h2 {
+        font-size: 13px !important;
+    }
+    
+    .profil-content, .competence-desc, .experience-list li, .school-address {
+        font-size: 10px;
+    }
+}
 /* Plugin trouvé sur Stack overflow :  https://stackoverflow.com/questions/56917493/how-to-keep-the-inner-square-in-a-infinite-rotation */
 .child1 {
     display: inline;
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 200px; /* Ajout de l'unité */
+    top: 100px; /* Ajout de l'unité */
     left: -50px;
     background-color: #e74c3c;
     border: 1px solid #e74c3c;
@@ -319,7 +425,7 @@ h3 img{
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 195px; /* Ajout de l'unité */
+    top: 145px; /* Ajout de l'unité */
     left: 20px;
     bottom: 20px;
     border: 1px solid #e74c3c;
@@ -331,7 +437,7 @@ h3 img{
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 750px; /* Ajout de l'unité */
+    top: 560px; /* Ajout de l'unité */
     left: 90vw;
     background-color: #e74c3c;
     border: 1px solid #e74c3c;
@@ -343,8 +449,8 @@ h3 img{
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 670px; /* Ajout de l'unité */
-    left: 88vw;
+    top: 530px; /* Ajout de l'unité */
+    left: 87vw;
     bottom: 20px;
     border: 1px solid #e74c3c;
     animation: rotating 35s linear infinite;
