@@ -19,6 +19,9 @@
 img{
     user-select: none;
 }
+button{
+    cursor: pointer;
+}
 /* Plugin Dark Mode */
 .theme__toggle {
     background-color: #e74c3c;
@@ -30,7 +33,7 @@ img{
     z-index: 10;
     left: 95%;
     top: 20px;
-    box-shadow: 1px 3px 5px  #b45656;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 .theme__toggle:hover{
     transform: scale(1.1);
@@ -59,10 +62,10 @@ img{
     display: inline;
   }
   :root {
-    --color-lightest: #ffffff;
-    --color-darkest: #121c2b;
-    --color-text-dark: #ffffff;
-    --color-text-light: #121c2b;
+    --color-lightest:  #121c2b;
+    --color-darkest: #ffffff;
+    --color-text-dark: #121c2b;
+    --color-text-light: #ffffff;
 }
 
 /* Mode sombre */
@@ -319,8 +322,8 @@ h3 img{
     top: 90vh;
     right: 20px;
     left: 30px;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background-color: #2D2D2D;
     border-radius: 5px;
     display: flex;
@@ -338,8 +341,6 @@ h3 img{
 }
 
 .print-button img {
-    width: 20px;
-    height: 20px;
     filter: brightness(0) invert(1);
 }
 @media print {
