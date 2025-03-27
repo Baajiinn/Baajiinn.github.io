@@ -45,10 +45,6 @@ button{
     transition: 0.3s;
   }
 
-  .theme__toggle > .light ,
-  .theme__toggle > .dark {
-    display: none;
-  }
   .theme__dark .theme__toggle > .light {
     display: inline;
   }
@@ -131,6 +127,7 @@ main{
 h2 {
     margin: 10px 0;
     text-transform: uppercase;
+    font-size: 2rem;
 }
 h3{
     margin: 10px 0;
@@ -138,6 +135,7 @@ h3{
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 1.3rem;
 }
 h3 img{
     width: 32px;
@@ -145,13 +143,13 @@ h3 img{
 }
 
 .header h1 {
-    font-size: 45px;
+    font-size: 3.5rem;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 5px;
 }
 .header p {
-    font-size: 18px;
+    font-size: 1rem;
     margin-bottom: 20px;
 }
 .sousHeader {
@@ -162,7 +160,7 @@ h3 img{
     background: rgba(255, 255, 255, 0.1) !important;
     border-radius: 20px;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 .coordonnees{
@@ -269,7 +267,6 @@ h3 img{
     appearance: none;
     width: 100%;
     height: 10px;
-    margin: 5px 0;
 }
 .competences meter::-webkit-meter-bar {
     background: rgba(255, 255, 255, 0.1) !important;
@@ -293,7 +290,7 @@ h3 img{
     background: rgba(255, 255, 255, 0.1) !important;
     border-radius: 20px;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 0.9rem;
     width: auto;
     text-align: center;
     text-transform: uppercase;
@@ -310,7 +307,7 @@ h3 img{
     background-color: rgba(255, 255, 255, 0.1) !important;
     border-radius: 20px;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 0.9rem;
     width: auto;
     text-align: center;
     text-transform: uppercase;
@@ -390,22 +387,6 @@ h3 img{
         bottom: 0;
         left: 0;
         width: 100%;
-    }
-    
-    body {
-        font-size: 11px;
-    }
-    
-    h1 {
-        font-size: 20px !important;
-    }
-    
-    h2 {
-        font-size: 13px !important;
-    }
-    
-    .profil-content, .competence-desc, .experience-list li, .school-address {
-        font-size: 10px;
     }
 }
 /* Plugin trouvé sur Stack overflow :  https://stackoverflow.com/questions/56917493/how-to-keep-the-inner-square-in-a-infinite-rotation */

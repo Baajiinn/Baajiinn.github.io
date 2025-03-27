@@ -27,13 +27,10 @@ $(document).ready(function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const printButton = document.querySelector('.print-button');
-
     if (printButton) {
         printButton.addEventListener('click', function() {
             window.print();
         });
     }
-    
     console.log('Script CV chargé avec succès');
-
 });
