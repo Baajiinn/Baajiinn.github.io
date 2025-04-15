@@ -1,3 +1,24 @@
+/* Plugin Dark Mode */
+.theme__toggle {
+    background-color: #e74c3c;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    border: 0;
+    position: fixed;
+    z-index: 100;
+    left: 95%;
+    top: 20px;
+}
+.theme__toggle span img:hover{
+    padding: 5px;
+    transition: 0.3s;
+}
+.theme__toggle span img:not(:hover){
+    padding: 0px;
+    transition: 0.3s;
+}
+
 /* Police Importé */
 .exo-2-normal {
     font-family: "Exo 2", sans-serif;
@@ -19,43 +40,25 @@
 img{
     user-select: none;
 }
+
 /* Plugin Dark Mode */
-.theme__toggle {
-    background-color: #e74c3c;
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
-    border: 0;
-    position: fixed;
-    z-index: 100;
-    left: 95%;
-    top: 20px;
-  }
-  .theme__toggle span img:hover{
-    padding: 5px;
-    transition: 0.3s;
-  }
-  .theme__toggle span img:not(:hover){
-    padding: 0px;
-    transition: 0.3s;
-  } 
-  .theme__toggle > .light ,
-  .theme__toggle > .dark {
+.theme__toggle > .light ,
+.theme__toggle > .dark {
     display: none;
-  }
-  .theme__dark .theme__toggle > .light {
+}
+.theme__dark .theme__toggle > .light {
     display: inline;
-  }
-  .theme__dark .theme__toggle > .dark {
+}
+.theme__dark .theme__toggle > .dark {
     display: none;
-  }
-  .theme__light .theme__toggle > .light {
+}
+.theme__light .theme__toggle > .light {
     display: none;
-  }
-  .theme__light .theme__toggle > .dark {
+}
+.theme__light .theme__toggle > .dark {
     display: inline;
-  }
-  :root {
+}
+:root {
     --color-lightest: #ffffff;
     --color-darkest: #121c2b;
     --color-text-dark: #ffffff;
@@ -68,13 +71,45 @@ img{
     color: var(--color-text-dark);
 }
 
+/* Ensure child elements are visible in dark mode */
+.theme__dark .child1,
+.theme__dark .child2,
+.theme__dark .borderchild1,
+.theme__dark .borderchild2 {
+    background-color: #e74c3c; /* Maintain visibility */
+    border-color: #e74c3c; /* Ensure border visibility */
+    z-index: 0; /* Ensure they are above other elements */
+}
+
+/* Ensure infosContainer content is on top in dark mode */
+.theme__dark .infosContainer {
+    position: relative;
+    z-index: 2; /* Place above child and borderchild elements */
+}
+
+/* Remove background color for borderchild1 and borderchild2 in dark mode */
+.theme__dark .borderchild1,
+.theme__dark .borderchild2 {
+    background-color: transparent; /* Remove background color */
+}
+
 /* Mode clair */
 .theme__light {
     background-color: var(--color-lightest);
     color: var(--color-text-light);
-}   
+}
 
-
+/* Light mode specific styles for <p><b> elements */
+.theme__light .sousHeader p {
+    background-color: #a0a0a085 !important; /* A darker background color for light mode */
+    color: #121c2b;
+}
+.theme__light .langues p{
+    background-color: #a0a0a085 !important; /* A darker background color for light mode */
+}
+.theme__light .centres p{
+    background-color: #a0a0a085 !important; /* A darker background color for light mode */
+}
 
 header {
     justify-content: center;
@@ -95,10 +130,14 @@ header img:hover{
     cursor: pointer;
 }
 .zoomed {
+    object-fit: contain; /* Ensures the image maintains its aspect ratio */
+    max-width: 100%; /* Prevents stretching horizontally */
+    max-height: 100%; /* Prevents stretching vertically */
+    width: auto; /* Adjusts width dynamically */
+    height: auto; /* Adjusts height dynamically */
     transform: scale(2); /* Zoom X2 */
     transition: transform 0.3s ease-in-out;
     transform-origin: center;
-    width: 100%;
     z-index: 1000; /* Pour être au-dessus du reste */
     min-width: 250px;
     max-width: 300px;
@@ -120,7 +159,7 @@ header img:hover{
 
 main{
     z-index: 99;
-    position: relative;
+    position: inherit;
 }
 h2 {
     margin: 10px 0;
@@ -350,11 +389,180 @@ h3 img{
     animation: rotating 35s linear infinite;
     z-index: 0; /* Pour s'assurer qu'il est bien visible */
 }
-  @keyframes rotating {
+@keyframes rotating {
     from {
       transform: rotate(0deg);
     }
     to {
       transform: rotate(360deg);
     }
-  }
+}
+
+/* Responsive Design */
+@media ( width < 1100px) {
+    .theme__toggle{
+        left: 90%;
+    }
+    .child1 {
+        top: 200px; /* Ajout de l'unité */
+        left: -100px;
+    }
+    .borderchild1 {
+        top: 160px; /* Ajout de l'unité */
+        left: -120px;
+    }
+    .borderchild2 {
+        top: 520px; /* Ajout de l'unité */
+        left: 89vw;
+    }
+    .child2 {
+        top: 560px; /* Ajout de l'unité */
+        left: 88vw;
+    }
+}
+@media (width < 930px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        text-align: center;
+    }
+
+    header img {
+        max-width: 150px;
+    }
+    main{
+        text-align: center;
+    }
+    .sousHeader {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .coordoneesContainer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .infosContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .leftColumn, .rightColumn {
+        width: 90%;
+    }
+
+    .formation div h3 {
+        text-align: center;
+        justify-self: center;
+    }
+    .travauxPersonnels div h3 {
+        text-align: center;
+        justify-self: center;
+    }
+    .experiences div h3 {
+        text-align: center;
+        justify-self: center;
+    }
+    .competences div h3 {
+        text-align: center;
+        justify-self: center;
+    }
+    .competences meter {
+        width: 70%;
+    }
+    .langues div {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .centres div {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .child1 {
+        z-index: -10000;
+    }
+    .borderchild1 {
+        z-index: -10001;
+    }
+    .child2 {
+        z-index: -10000;
+    }
+    .borderchild2 {
+        z-index: -10001;
+    }
+}
+
+@media (height < 700px) {
+    .photoHolderZoomed img{
+       padding-bottom: 90px;
+        transform: scale(1.9); 
+        border-radius: 10px;
+    }
+}
+@media (height < 550px) {
+    .photoHolderZoomed img{
+       padding-bottom: 90px;
+        transform: scale(1.5);
+        border-radius: 10px;
+    }
+}
+
+@media (width < 480px) {
+    .photoHolderZoomed img{
+        transform: scale(1.3); /* Zoom X1.5 */
+        padding-top: 40px;
+        border-radius: 10px;
+    }
+    .header h1 {
+        margin-top: 50px;
+        font-size: 30px;
+    }
+
+    .header p {
+        font-size: 14px;
+    }
+
+    .coordonnees {
+        font-size: 14px;
+    }
+
+    .competences h3 img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .competences meter {
+        height: 8px;
+    }
+
+    .langues p, .centres p {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+    .theme__toggle{
+        left: 85%;
+    }
+
+    
+    .child1 {
+        top: 120px; /* Ajout de l'unité */
+        left: -150px;
+        z-index: -10000;
+    }
+    .borderchild1 {
+        top: 160px; /* Ajout de l'unité */
+        left: -120px;
+        z-index: -10001;
+    }
+    .child2 {
+        z-index: -10000;
+    }
+    .borderchild2 {
+        z-index: -10001;
+    }
+}

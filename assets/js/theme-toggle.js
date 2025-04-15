@@ -14,14 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Vérifie si un thème est déjà stocké
-  if (localStorage.getItem("theme") === "dark") {
-    body.classList.add("theme__dark");
-    updateImages("dark");
-  } else {
-    body.classList.add("theme__light");
-    updateImages("light");
-  }
+  // Always set light mode as default on page load
+  body.classList.add("theme__light");
+  updateImages("light");
+  localStorage.setItem("theme", "light");
 
   toggleButton.addEventListener("click", function () {
     if (body.classList.contains("theme__light")) {
