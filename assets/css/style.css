@@ -10,14 +10,6 @@
     left: 95%;
     top: 20px;
 }
-.theme__toggle span img:hover{
-    padding: 5px;
-    transition: 0.3s;
-}
-.theme__toggle span img:not(:hover){
-    padding: 0px;
-    transition: 0.3s;
-}
 
 /* Police Importé */
 .exo-2-normal {
@@ -44,7 +36,7 @@ button{
     cursor: pointer;
 }
 /* Plugin Dark Mode */
-.theme__toggle {
+.theme__toggle button{
     background-color: #e74c3c;
     width: 50px;
     height: 50px;
@@ -61,8 +53,6 @@ button{
     transition: 0.3s ;
   }
   .theme__toggle:not(:hover){
-    width: 50px;
-    height: 50px;
     transition: 0.3s;
   }
 
@@ -90,7 +80,15 @@ button{
     background-color: var(--color-darkest);
     color: var(--color-text-dark);
 }
-
+.theme__dark .sousHeader p {
+    background-color: #a0a0a085 !important; /* A darker background color for dark mode */
+}
+.theme__dark .langues p{
+    background-color: #a0a0a085 !important; /* A darker background color for dark mode */
+}
+.theme__dark .centres p{
+    background-color: #a0a0a085 !important; /* A darker background color for dark mode */
+}
 /* Ensure child elements are visible in dark mode */
 .theme__dark .child1,
 .theme__dark .child2,
@@ -122,7 +120,6 @@ button{
 /* Light mode specific styles for <p><b> elements */
 .theme__light .sousHeader p {
     background-color: #a0a0a085 !important; /* A darker background color for light mode */
-    color: #121c2b;
 }
 .theme__light .langues p{
     background-color: #a0a0a085 !important; /* A darker background color for light mode */
@@ -220,6 +217,7 @@ h3 img{
     padding: 10px 20px;
     font-size: 0.9rem;
 }
+
 
 .coordonnees{
     text-align: center;
