@@ -40,6 +40,7 @@
 img{
     user-select: none;
 }
+<<<<<<< HEAD
 
 /* Plugin Dark Mode */
 .theme__toggle > .light ,
@@ -47,6 +48,35 @@ img{
     display: none;
 }
 .theme__dark .theme__toggle > .light {
+=======
+button{
+    cursor: pointer;
+}
+/* Plugin Dark Mode */
+.theme__toggle {
+    background-color: #e74c3c;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    border: 0;
+    position: fixed;
+    z-index: 10;
+    left: 95%;
+    top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.theme__toggle:hover{
+    transform: scale(1.1);
+    transition: 0.3s ;
+  }
+  .theme__toggle:not(:hover){
+    width: 50px;
+    height: 50px;
+    transition: 0.3s;
+  }
+
+  .theme__dark .theme__toggle > .light {
+>>>>>>> 8a7cbe5cc77555406374d62c5662b5d15fa0b9d8
     display: inline;
 }
 .theme__dark .theme__toggle > .dark {
@@ -57,12 +87,21 @@ img{
 }
 .theme__light .theme__toggle > .dark {
     display: inline;
+<<<<<<< HEAD
 }
 :root {
     --color-lightest: #ffffff;
     --color-darkest: #121c2b;
     --color-text-dark: #ffffff;
     --color-text-light: #121c2b;
+=======
+  }
+  :root {
+    --color-lightest:  #121c2b;
+    --color-darkest: #ffffff;
+    --color-text-dark: #121c2b;
+    --color-text-light: #ffffff;
+>>>>>>> 8a7cbe5cc77555406374d62c5662b5d15fa0b9d8
 }
 
 /* Mode sombre */
@@ -123,7 +162,7 @@ header {
 header img {
     border-radius: 5px;
     max-width: 250px;
-    z-index: 1001;
+    z-index: 4;
 }
 /* Indication sur effet lightbox */
 header img:hover{
@@ -137,12 +176,17 @@ header img:hover{
     height: auto; /* Adjusts height dynamically */
     transform: scale(2); /* Zoom X2 */
     transition: transform 0.3s ease-in-out;
+<<<<<<< HEAD
     transform-origin: center;
+=======
+    width: 100%;
+>>>>>>> 8a7cbe5cc77555406374d62c5662b5d15fa0b9d8
     z-index: 1000; /* Pour être au-dessus du reste */
     min-width: 250px;
     max-width: 300px;
     min-height: 300px;
     max-height: 500px;
+    z-index: 5;
 }
 .photoHolderZoomed {
     background-color: rgba(0, 0, 0, 0.8); /* Assombrit l’arrière-plan */ 
@@ -154,16 +198,22 @@ header img:hover{
     padding: 250px 50px;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 4;
 }
 
 main{
+<<<<<<< HEAD
     z-index: 99;
     position: inherit;
+=======
+    z-index: 2;
+    position: relative;
+>>>>>>> 8a7cbe5cc77555406374d62c5662b5d15fa0b9d8
 }
 h2 {
     margin: 10px 0;
     text-transform: uppercase;
+    font-size: 2rem;
 }
 h3{
     margin: 10px 0;
@@ -171,6 +221,7 @@ h3{
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 1.3rem;
 }
 h3 img{
     width: 32px;
@@ -178,13 +229,13 @@ h3 img{
 }
 
 .header h1 {
-    font-size: 45px;
+    font-size: 3.5rem;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 5px;
 }
 .header p {
-    font-size: 18px;
+    font-size: 1rem;
     margin-bottom: 20px;
 }
 .sousHeader {
@@ -195,7 +246,7 @@ h3 img{
     background: rgba(255, 255, 255, 0.1) !important;
     border-radius: 20px;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 .coordonnees{
@@ -275,6 +326,14 @@ h3 img{
 .travauxPersonnels div{
     margin-top: 20px;
 }
+.travauxPersonnels div div{
+    display: flex;
+    align-items: center;
+}
+.travauxPersonnels div div button{
+    background-color: #ffffff00;
+    border: 0;
+}
 .experiences div{
     margin-top: 20px;
 }
@@ -294,7 +353,6 @@ h3 img{
     appearance: none;
     width: 100%;
     height: 10px;
-    margin: 5px 0;
 }
 .competences meter::-webkit-meter-bar {
     background: rgba(255, 255, 255, 0.1) !important;
@@ -318,7 +376,7 @@ h3 img{
     background: rgba(255, 255, 255, 0.1) !important;
     border-radius: 20px;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 0.9rem;
     width: auto;
     text-align: center;
     text-transform: uppercase;
@@ -335,10 +393,87 @@ h3 img{
     background-color: rgba(255, 255, 255, 0.1) !important;
     border-radius: 20px;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 0.9rem;
     width: auto;
     text-align: center;
     text-transform: uppercase;
+}
+
+/* Bouton d'impression */
+.print-button {
+    position: fixed;
+    top: 90vh;
+    right: 20px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #2D2D2D;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.print-button:hover {
+    background-color: #e74c3c;
+    transform: scale(1.1);
+}
+
+.print-button img {
+    filter: brightness(0) invert(1);
+}
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+    
+    html, body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
+    
+    .cv-container {
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+    
+    .print-button {
+        display: none;
+    }
+    
+    #particles-js {
+        display: none;
+    }
+    
+    .sidebar {
+        padding: 15px;
+        width: 32%;
+        background-color: #2D2D2D !important;
+    }
+    
+    .main-content {
+        padding: 15px 20px;
+        width: 68%;
+    }
+    
+    .cv-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
 }
 /* Plugin trouvé sur Stack overflow :  https://stackoverflow.com/questions/56917493/how-to-keep-the-inner-square-in-a-infinite-rotation */
 .child1 {
@@ -346,7 +481,7 @@ h3 img{
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 200px; /* Ajout de l'unité */
+    top: 100px; /* Ajout de l'unité */
     left: -50px;
     background-color: #e74c3c;
     border: 1px solid #e74c3c;
@@ -358,7 +493,7 @@ h3 img{
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 195px; /* Ajout de l'unité */
+    top: 145px; /* Ajout de l'unité */
     left: 20px;
     bottom: 20px;
     border: 1px solid #e74c3c;
@@ -370,7 +505,7 @@ h3 img{
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 750px; /* Ajout de l'unité */
+    top: 560px; /* Ajout de l'unité */
     left: 90vw;
     background-color: #e74c3c;
     border: 1px solid #e74c3c;
@@ -382,8 +517,8 @@ h3 img{
     width: 200px;
     height: 200px;
     position: fixed;
-    top: 670px; /* Ajout de l'unité */
-    left: 88vw;
+    top: 530px; /* Ajout de l'unité */
+    left: 87vw;
     bottom: 20px;
     border: 1px solid #e74c3c;
     animation: rotating 35s linear infinite;

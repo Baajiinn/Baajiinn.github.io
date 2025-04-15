@@ -1,5 +1,0 @@
-1. effet lightbox sur photo
-2. lazyload sur les textes par affichage sur l'écran ( on prend toute la ligne )
-3. effet paralaxe avec les 2 carrés qui tournent grâce au CSS
-4. bouton nocturne
-5. bouton de téléchargement en format pdf

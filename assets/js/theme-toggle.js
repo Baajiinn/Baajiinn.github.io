@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
     images.forEach((img) => {
       const src = img.getAttribute("src");
       if (theme === "light") {
-        img.setAttribute("src", src.replace(".png", "1.png"));
-      } else {
         img.setAttribute("src", src.replace("1.png", ".png"));
+      } else {
+        img.setAttribute("src", src.replace(".png", "1.png"));
       }
     });
   }
