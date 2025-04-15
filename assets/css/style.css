@@ -40,15 +40,6 @@
 img{
     user-select: none;
 }
-<<<<<<< HEAD
-
-/* Plugin Dark Mode */
-.theme__toggle > .light ,
-.theme__toggle > .dark {
-    display: none;
-}
-.theme__dark .theme__toggle > .light {
-=======
 button{
     cursor: pointer;
 }
@@ -76,7 +67,6 @@ button{
   }
 
   .theme__dark .theme__toggle > .light {
->>>>>>> 8a7cbe5cc77555406374d62c5662b5d15fa0b9d8
     display: inline;
 }
 .theme__dark .theme__toggle > .dark {
@@ -87,21 +77,12 @@ button{
 }
 .theme__light .theme__toggle > .dark {
     display: inline;
-<<<<<<< HEAD
-}
-:root {
-    --color-lightest: #ffffff;
-    --color-darkest: #121c2b;
-    --color-text-dark: #ffffff;
-    --color-text-light: #121c2b;
-=======
   }
   :root {
     --color-lightest:  #121c2b;
     --color-darkest: #ffffff;
     --color-text-dark: #121c2b;
     --color-text-light: #ffffff;
->>>>>>> 8a7cbe5cc77555406374d62c5662b5d15fa0b9d8
 }
 
 /* Mode sombre */
@@ -176,11 +157,7 @@ header img:hover{
     height: auto; /* Adjusts height dynamically */
     transform: scale(2); /* Zoom X2 */
     transition: transform 0.3s ease-in-out;
-<<<<<<< HEAD
-    transform-origin: center;
-=======
     width: 100%;
->>>>>>> 8a7cbe5cc77555406374d62c5662b5d15fa0b9d8
     z-index: 1000; /* Pour être au-dessus du reste */
     min-width: 250px;
     max-width: 300px;
@@ -202,13 +179,8 @@ header img:hover{
 }
 
 main{
-<<<<<<< HEAD
-    z-index: 99;
-    position: inherit;
-=======
     z-index: 2;
     position: relative;
->>>>>>> 8a7cbe5cc77555406374d62c5662b5d15fa0b9d8
 }
 h2 {
     margin: 10px 0;

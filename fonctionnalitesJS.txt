@@ -1,5 +1,4 @@
 1. effet lightbox sur photo - OK
-2. lazyload sur les textes par affichage sur l'écran ( on prend toute la ligne )
 3. bouton nocturne - OK
 4. bouton de téléchargement en format pdf
 5. flèches déployables
