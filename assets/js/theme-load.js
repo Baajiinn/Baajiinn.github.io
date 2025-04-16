@@ -3,9 +3,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const root = document.documentElement;
 
     function toggleTheme() {
-        // Applique la nouvelle classe et stocke la valeur
+        // Réinitialisation propre de la classe thème (non utilisé ici mais potentiellement utile)
         root.classList.remove("theme__dark", "theme__light");
     }
-    // Appliquer le changement de thème au clic sur le bouton
+
     toggleButton.addEventListener("click", toggleTheme);
+});
+
+// Gestion du dark mode temporaire à l'impression
+document.querySelector('.print-button').addEventListener('click', () => {
+    const wasDark = document.body.classList.contains('theme__dark');
+
+    if (!wasDark) {
+        document.body.classList.add('theme__dark');
+        window.print();
+        setTimeout(() => {
+            document.body.classList.remove('theme__dark');
+        }, 1000);
+    } else {
+        window.print();
+    }
 });

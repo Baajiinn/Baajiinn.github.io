@@ -23,14 +23,7 @@ $(document).ready(function() {
         }
     });
 });
-/* Script JS pour le CV qui gère l'interaction avec le bouton d'impression */
 
-document.addEventListener('DOMContentLoaded', function() {
-    const printButton = document.querySelector('.print-button');
-    if (printButton) {
-        printButton.addEventListener('click', function() {
-            window.print();
-        });
-    }
+document.addEventListener("DOMContentLoaded", function () {
     console.log('Script CV chargé avec succès');
 });
