@@ -27,3 +27,5 @@ $(document).ready(function() {
 document.addEventListener("DOMContentLoaded", function () {
     console.log('Script CV chargé avec succès');
 });
+
+

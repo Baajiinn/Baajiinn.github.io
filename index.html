@@ -23,8 +23,17 @@
             <img src="assets/img/photo.jpg" alt="photo" id="photo" class="photo">
         </div>
         <div class="header">
-            <h1>Esdras Lubanguku</h1>
-            <h3>Etudiant à la Haute école en Hainaut en cybersécurité</h3>
+            <h1 class="ml11">
+                <span class="text-wrapper">
+                  <span class="line line1"></span>
+                  <span class="letters">Esdras Lubanguku</span>
+                </span>
+              </h1>
+            <h3 class="ml7">
+                <span class="text-wrapper">
+                    <span class="letters">Étudiant à la Haute école en Hainaut en cybersécurité passionné par le pentesting</span>
+                </span>
+            </h3>
             <div class="sousHeader">
                 <p><b>PERMIS B - VÉHICULE PERSONNEL</b></p>
                 <p><b>20 ANS</b></p>
@@ -36,21 +45,16 @@
         <div class="coordonnees">
             <h2>COORDONNÉES</h2>
             <div class="coordoneesContainer">
-                <div class="col1">
-                        <a href="tel:+32483644618">
-                            <img src="assets/img/telephone.png" alt="téléphone" width="16">
-                            <p>+32 483 64 46 18</p>
-                        </a>
-                        <a href="MAILTO:lubanguku.esd@gmail.com">
-                            <img src="assets/img/email.png" alt="lettre">
-                            <p>lubanguku.esd@gmail.com</p>
-                        </a>
-                </div>
-                <div class="col2">
-                    <img src="assets/img/maison.png" alt="adresse">
-                    <p>20 Rue Arthur Lheureux<br>7340, COLFONTAINE</p>
-                </div>
-                <div class="col3">
+                <a href="tel:+32483644618">
+                    <img src="assets/img/telephone.png" alt="téléphone" width="16">
+                    <p>+32 483 64 46 18</p>
+                </a>
+                <a href="MAILTO:lubanguku.esd@gmail.com">
+                    <img src="assets/img/email.png" alt="lettre">
+                    <p>lubanguku.esd@gmail.com</p>
+                </a>
+                <p><img src="assets/img/maison.png" alt="adresse"> Colfontaine</p>
+                <div class="socials">
                     <a href="https://www.linkedin.com/in/esdras-lubanguku-806a1a351/">
                         <img src="assets/img/linkedinLogo.png" alt="LinkedIn">
                     </a>
@@ -65,16 +69,8 @@
                 <section class="formation">
                     <h2>Formation</h2>
                     <div>
-                        <h3>2023 CESS</h3>
-                        <p>Obtention du CESS à l’école secondaire des Ursulines</p>
-                    </div>
-                    <div>
                         <h3>2024 - 2026 BACHELIER EN INFORMATIQUE</h3>
                         <p>Tente d’obtenir son bachelier en informatique avec l’option sécurité à la Haute école en Hainaut</p>
-                    </div>
-                    <div>
-                        <h3> 2024 SITES INTERNETS </h3>
-                        <p>Depuis Août 2024, apprentissage du pentesting sur HackTheBox, TryHackMe et RootMe</p>
                     </div>
                 </section>
                 <section class="travauxPersonnels">
@@ -83,27 +79,12 @@
                         <h3> 2024 HACKATHON </h3>
                         <div>
                             <p>Création d’un jeu appelé Dragon Dash présent sur mon <a href="https://github.com/Baajiinn"><b>GitHub</b></a></p>
-                            <button>
-                                <img src="assets/img/fleche.png" alt="flèche" width="40">
-                            </button>
                         </div>
                     </div>
                     <div>
                         <h3> 2024 AREA TYPE </h3>
                         <div>
                             <p>Création d’une page web pour s’entraîner à taper sur un clavier présent sur mon <a href="https://github.com/Baajiinn"><b>GitHub</b></a></p>
-                            <button>
-                                <img src="assets/img/fleche.png" alt="flèche" width="40">
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-                        <h3> 2024 INUANIME </h3>
-                        <div>
-                            <p>Création d’une page web pour regarder ses animes préférés présent sur mon <a href="https://github.com/Baajiinn"><b>GitHub</b></a></p>
-                            <button>
-                                <img src="assets/img/fleche.png" alt="flèche" width="40">
-                            </button>
                         </div>
                     </div>
                 </section>
@@ -191,5 +172,66 @@
     <div class="borderchild2"></div>
 </body>
 </html>
+<!-- Plugin pour dark mode -->
 <script src="assets/js/jquery-3.7.1.js"></script>
 <script src="assets/js/index.js"></script>
+<!-- Plugin pour défilement de texte pour mon nom -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script>
+    /* Plugin de défilement de texte */
+    // Wrap every letter in a span
+    var textWrapper = document.querySelector('.ml11 .letters');
+    textWrapper.innerHTML = textWrapper.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
+
+    anime.timeline({loop: true})
+    .add({
+        targets: '.ml11 .line',
+        scaleY: [0,1],
+        opacity: [0.5,1],
+        easing: "easeOutExpo",
+        duration: 700
+    })
+    .add({
+        targets: '.ml11 .line',
+        translateX: [0, document.querySelector('.ml11 .letters').getBoundingClientRect().width + 10],
+        easing: "easeOutExpo",
+        duration: 700,
+        delay: 100
+    }).add({
+        targets: '.ml11 .letter',
+        opacity: [0,1],
+        easing: "easeOutExpo",
+        duration: 600,
+        offset: '-=775',
+        delay: (el, i) => 34 * (i+1)
+    }).add({
+        targets: '.ml11',
+        opacity: 0,
+        duration: 1000,
+        easing: "easeOutExpo",
+        delay: 3260
+    });
+
+
+   // Wrap every letter in a span
+    var textWrapper = document.querySelector('.ml7 .letters');
+    textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+    anime.timeline({loop: true})
+    .add({
+        targets: '.ml7 .letter',
+        translateY: ["1.1em", 0],
+        translateX: ["0.55em", 0],
+        translateZ: 0,
+        rotateZ: [180, 0],
+        duration: 750,
+        easing: "easeOutExpo",
+        delay: (el, i) => 50 * i
+    }).add({
+        targets: '.ml7',
+        opacity: 0,
+        duration: 1000,
+        easing: "easeOutExpo",
+        delay: 1000
+    });
+</script>

@@ -136,15 +136,21 @@ header {
     gap: 30px;
     z-index: 3;
     position: relative;
+    
 }
 header img {
     border-radius: 5px;
     max-width: 250px;
     z-index: 4;
+    
 }
 /* Indication sur effet lightbox */
-header img:hover{
+header .photoHolder{
+    transition: all 0.3s ease;
+}
+header .photoHolder:hover{
     cursor: pointer;
+    transform: scale(1.05);
 }
 .zoomed {
     object-fit: contain; /* Ensures the image maintains its aspect ratio */
@@ -196,12 +202,60 @@ h3 img{
     width: 32px;
     height: 32px;
 }
+.ml11 {
+    font-weight: 700;
+    font-size: 3.5em;
+  }
+.ml11 .text-wrapper {
+position: relative;
+display: inline-block;
+padding-top: 0.1em;
+padding-right: 0.05em;
+padding-bottom: 0.15em;
+}
+.ml11 .line {
+opacity: 0;
+position: absolute;
+left: 0;
+height: 100%;
+width: 3px;
+background-color: #e74c3c;
+transform-origin: 0 50%;
+}
 
-.header h1 {
-    font-size: 2.9rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 5px;
+.ml11 .line1 { 
+top: 0; 
+left: 0;
+}
+
+.ml11 .letter {
+display: inline-block;
+line-height: 1em;
+}
+.ml7 {
+    position: relative;
+    font-weight: 900;
+    font-size: 3.7em;
+  }
+  .ml7 .text-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-top: 0.2em;
+    padding-right: 0.05em;
+    padding-bottom: 0.1em;
+    overflow: hidden;
+  }
+  .ml7 .letter {
+    transform-origin: 0 100%;
+    display: inline-block;
+    line-height: 1em;
+  }
+.header h3{
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-transform: none;
+    font-weight: 400;
+    justify-self: center;
 }
 .header p {
     font-size: 1rem;
@@ -219,53 +273,56 @@ h3 img{
 }
 
 
-.coordonnees{
+.coordonnees {
     text-align: center;
-    background-color: #182232 !important;
-    padding: 10px;
-    color: white !important;
-    position: relative; /* Ajout pour pouvoir appliquer un z-index */
-    z-index: 2; /* Plus grand que celui des carrés */
+    background-color: #1E2B3A;
+    padding: 20px 10px;
+    color: white;
+    position: relative;
+    z-index: 2;
+    font-family: 'Exo 2', sans-serif;
+    border-radius: 10px;
+    margin: 30px 20px;
 }
+
 .coordoneesContainer {
-    display: flex; 
-    justify-content: center;
-    gap: 50px;
-    padding: 0 20px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+    padding: 20px 0;
     align-items: center;
 }
-.coordoneesContainer a {
-    color: white;
+
+.coordoneesContainer a, .coordoneesContainer p {
     display: flex;
     align-items: center;
-    text-decoration: none;
     gap: 10px;
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
 }
 .coordoneesContainer img {
-    width: 40px;
-    height: 40px;
-}
-.col1{
-    display: flex;
-    flex-direction: column;
-}
-.col1 img{
     width: 24px;
     height: 24px;
+    transition: transform 0.3s ease;
 }
-.col2{
-    display: flex;
-    align-items: center;
-    gap: 10px;
+
+.coordoneesContainer a:hover img {
+    transform: scale(1.2);
 }
-.col2 img{
-    width: 24px;
-    height: 24px;
+
+.coordoneesContainer div a img {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px;
 }
-.col3 {
+.socials {
     display: flex;
     gap: 15px;
+    justify-content: center;
+    align-items: center;
 }
+
 .infosContainer{
     margin: 100px 0px;
     display: flex;
@@ -300,10 +357,6 @@ h3 img{
     display: flex;
     align-items: center;
 }
-.travauxPersonnels div div button{
-    background-color: #ffffff00;
-    border: 0;
-}
 .experiences div{
     margin-top: 20px;
 }
@@ -330,7 +383,7 @@ h3 img{
 }
 
 .competences meter::-webkit-meter-optimum-value {
-    background: #e74c3c; /* The color you requested */
+    background: #e74c3c; 
     border-radius: 10px;
 }
 
@@ -343,7 +396,7 @@ h3 img{
     gap: 20px;
 }
 .langues p{
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: #e74c3c;
     border-radius: 20px;
     padding: 10px 20px;
     font-size: 0.9rem;
@@ -351,16 +404,20 @@ h3 img{
     text-align: center;
     text-transform: uppercase;
 }
-.centres div{
-    display: flex;
-    gap: 20px;
+.centers div{
+    width: 20px;
 }
 .centres div div{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: center;
 }
+
 .centres div p{
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: #e74c3c;
     border-radius: 20px;
     padding: 10px 20px;
     font-size: 0.9rem;
@@ -407,9 +464,6 @@ h3 img{
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
-    h3{
-        text-align: left !important;
-    }
     header {
         display: flex;
         padding: 20px 0px;
@@ -444,38 +498,49 @@ h3 img{
     .coordoneesContainer{
         flex-direction: row !important;
         gap: 40px !important;
-    }
-    .col2{
-        text-align: right !important;
-    }
-    .coordoneesContainer img{
-        display: none;
+        justify-content: center !important;
     }
     .infosContainer {
         flex-direction: row !important;
         align-items: flex-start !important;
         margin: 40px 0px !important;
+        text-align: center !important;
     }
     .leftColumn, .rightColumn{
         flex-direction: column !important;
         gap: 50px !important;
-        width: 25% !important;
-        text-align: left !important;
+        width: 30% !important;
     }
-    .competences meter{
-        display: none !important;
+    .formation p{
+        text-align: center !important;
     }
     .travauxPersonnels img{
         display: none;
     }
+    .langues p{
+        font-size: 0.75em !important;
+        padding: 10px !important;
+    }
     .print-button {
         display: none !important;
     }
-    
-    #particles-js {
-        display: none;
+    .competences{
+        text-align: center !important;
     }
-    
+    .competences meter{
+        justify-self: center;
+        display: flex;
+    }
+   .experiences h2{
+        text-align: center !important;
+    }
+    .centres div div{
+        justify-content:flex-start !important;
+    }
+    .centres div div p{
+        padding: 10px !important;
+        font-size: 0.75em !important;
+    }
     .sidebar {
         padding: 15px;
         width: 32%;
@@ -609,9 +674,12 @@ h3 img{
         text-align: center;
         justify-self: center;
     }
-    .travauxPersonnels div h3 {
+    .travauxPersonnels div h3,  .travauxPersonnels div div {
         text-align: center;
         justify-self: center;
+    }
+    .travauxPersonnels div div button {
+        display: none;
     }
     .experiences div h3 {
         text-align: center;
@@ -634,6 +702,9 @@ h3 img{
         flex-direction: row;
         justify-content: center;
     }
+    .centres div div{
+        justify-content:center;
+    }
     .child1 {
         z-index: -10000;
     }
@@ -654,6 +725,7 @@ h3 img{
         transform: scale(1.9); 
         border-radius: 10px;
     }
+    
 }
 @media (height < 550px) {
     .photoHolderZoomed img{
