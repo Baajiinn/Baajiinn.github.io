@@ -545,7 +545,8 @@ line-height: 1em;
         justify-self: center;
         display: flex;
     }
-   .experiences h2{
+   .infosContainer .leftColumn .experiences h2{
+        justify-self: center !important;
         text-align: center !important;
     }
     .centres div div{
