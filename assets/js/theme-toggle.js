@@ -14,6 +14,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Ensure light mode logos are used for print
+  window.addEventListener("beforeprint", () => {
+    updateImages("light");
+  });
+
+  window.addEventListener("afterprint", () => {
+    const currentTheme = localStorage.getItem("theme") || "light";
+    updateImages(currentTheme);
+  });
+
   // Always set light mode as default on page load
   body.classList.add("theme__light");
   updateImages("light");
