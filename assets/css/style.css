@@ -204,7 +204,7 @@ h3 img{
 }
 .ml11 {
     font-weight: 700;
-    font-size: 3.5em;
+    font-size: 3.2em;
   }
 .ml11 .text-wrapper {
 position: relative;
@@ -232,34 +232,21 @@ left: 0;
 display: inline-block;
 line-height: 1em;
 }
-.ml7 {
-    position: relative;
-    font-weight: 900;
-    font-size: 3.7em;
-  }
-  .ml7 .text-wrapper {
-    position: relative;
-    display: inline-block;
-    padding-top: 0.2em;
-    padding-right: 0.05em;
-    padding-bottom: 0.1em;
-    overflow: hidden;
-  }
-  .ml7 .letter {
-    transform-origin: 0 100%;
-    display: inline-block;
-    line-height: 1em;
-  }
 .header h3{
     font-size: 1.2rem;
     margin-bottom: 10px;
     text-transform: none;
     font-weight: 400;
     justify-self: center;
+    white-space: inherit;
 }
 .header p {
     font-size: 1rem;
     margin-bottom: 20px;
+}
+.header .copy{
+    visibility: hidden !important;
+    display: none !important;
 }
 .sousHeader {
     display: flex;
@@ -287,7 +274,7 @@ line-height: 1em;
 
 .coordoneesContainer {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     gap: 30px;
     padding: 20px 0;
     align-items: center;
@@ -453,6 +440,16 @@ line-height: 1em;
 .print-button img {
     filter: brightness(0) invert(1);
 }
+
+/* Adjust the print button position for mobile devices */
+.print-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: auto;
+    top: auto;
+}
+
 @media print {
     @page {
         size: A4;
@@ -466,10 +463,11 @@ line-height: 1em;
     }
     header {
         display: flex;
-        padding: 20px 0px;
+        padding: 20px 70px;
         flex-direction: row !important;
         justify-content: center;
         align-items: flex-start !important;
+        margin-left: 85px !important;
     }
     header img {
         border-radius: 5px;
@@ -477,15 +475,31 @@ line-height: 1em;
     }
     .header h1{
         text-align: left;
-        font-size: 2.1rem;;
+        font-size: 2.1rem;
     }
     .header h3{
         text-align: left;
         font-size: 1rem;
+        margin-right: 70px;
+    }
+    .ml11, .text-wrapper, .line, .letter, .line1{
+        display: none !important;
+        visibility: hidden !important;
+        overflow: hidden !important;
+        width: 0px !important;
+    }
+    .header .copy{
+        visibility: visible !important;
+        display: block !important;
     }
     .sousHeader{
-        flex-direction: row !important;
+        flex-direction: column !important;
         font-size: 0.6rem;
+        display: flex;
+        gap: 10px; /* Reduce the gap between the boxes */
+        align-items: flex-start !important;
+        margin-left: -60px;
+
     }
     .coordonnees,
     .leftColumn,
@@ -554,6 +568,7 @@ line-height: 1em;
     }
     .child1, .child2, .borderchild1, .borderchild2{
         visibility: hidden !important;
+        display: none !important;
     }
 }
 /* Plugin trouvé sur Stack overflow :  https://stackoverflow.com/questions/56917493/how-to-keep-the-inner-square-in-a-infinite-rotation */
@@ -647,12 +662,16 @@ line-height: 1em;
     header img {
         max-width: 150px;
     }
+
     main{
         text-align: center;
     }
     .sousHeader {
         flex-direction: column;
         gap: 10px;
+    }
+    .sousHeader p {
+        margin: 0px 60px;
     }
 
     .coordoneesContainer {
@@ -718,7 +737,12 @@ line-height: 1em;
         z-index: -10001;
     }
 }
-
+@media (width < 726px) {
+    .header h3{
+        font-size: 0.9em;
+    }
+    
+}
 @media (height < 700px) {
     .photoHolderZoomed img{
        padding-bottom: 90px;

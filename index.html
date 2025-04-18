@@ -23,17 +23,14 @@
             <img src="assets/img/photo.jpg" alt="photo" id="photo" class="photo">
         </div>
         <div class="header">
+            <h1 class="copy">Esdras Lubanguku</h1>
             <h1 class="ml11">
                 <span class="text-wrapper">
                   <span class="line line1"></span>
                   <span class="letters">Esdras Lubanguku</span>
                 </span>
-              </h1>
-            <h3 class="ml7">
-                <span class="text-wrapper">
-                    <span class="letters">Étudiant à la Haute école en Hainaut en cybersécurité passionné par le pentesting</span>
-                </span>
-            </h3>
+            </h1>
+            <h3>Étudiant à la Haute école en Hainaut en cybersécurité passionné par le pentesting</h3>
             <div class="sousHeader">
                 <p><b>PERMIS B - VÉHICULE PERSONNEL</b></p>
                 <p><b>20 ANS</b></p>
@@ -172,13 +169,11 @@
     <div class="borderchild2"></div>
 </body>
 </html>
-<!-- Plugin pour dark mode -->
 <script src="assets/js/jquery-3.7.1.js"></script>
 <script src="assets/js/index.js"></script>
-<!-- Plugin pour défilement de texte pour mon nom -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script>
-    /* Plugin de défilement de texte */
+        /* Plugin de défilement de texte */
     // Wrap every letter in a span
     var textWrapper = document.querySelector('.ml11 .letters');
     textWrapper.innerHTML = textWrapper.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
@@ -190,48 +185,52 @@
         opacity: [0.5,1],
         easing: "easeOutExpo",
         duration: 700
-    })
-    .add({
+      })
+      .add({
         targets: '.ml11 .line',
         translateX: [0, document.querySelector('.ml11 .letters').getBoundingClientRect().width + 10],
         easing: "easeOutExpo",
         duration: 700,
         delay: 100
-    }).add({
+      }).add({
         targets: '.ml11 .letter',
         opacity: [0,1],
         easing: "easeOutExpo",
         duration: 600,
         offset: '-=775',
         delay: (el, i) => 34 * (i+1)
-    }).add({
+      }).add({
         targets: '.ml11',
         opacity: 0,
         duration: 1000,
         easing: "easeOutExpo",
-        delay: 3260
+        delay: 1000
+      });
+
+    $(window).on("resize", function () {
+        const line = document.querySelector('.ml11 .line1');
+        if ($(this).width() < 730) {
+            const lettersWidth = document.querySelector('.ml11 .letters').getBoundingClientRect().width + 10;
+            line.style.transform = 'translateX(0)'; // Reset position
+            anime({
+                targets: line,
+                translateX: [0, lettersWidth + 10],
+                opacity: 0, // Make the line disappear
+                duration: 500,
+                easing: "easeOutExpo",
+                complete: function() {
+                    line.style.transform = 'translateX(0)'; // Reset position
+                }
+            });
+        } else {
+            initializeTextAnimation(); // Ensure the line respawns in the next loop
+        }
     });
 
-
-   // Wrap every letter in a span
-    var textWrapper = document.querySelector('.ml7 .letters');
-    textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-    anime.timeline({loop: true})
-    .add({
-        targets: '.ml7 .letter',
-        translateY: ["1.1em", 0],
-        translateX: ["0.55em", 0],
-        translateZ: 0,
-        rotateZ: [180, 0],
-        duration: 750,
-        easing: "easeOutExpo",
-        delay: (el, i) => 50 * i
-    }).add({
-        targets: '.ml7',
-        opacity: 0,
-        duration: 1000,
-        easing: "easeOutExpo",
-        delay: 1000
+    $('.print-button').on('click', function () {
+        window.print();
+        setTimeout(function () {
+            $('.ml11 .letters').css('opacity', '1'); // Ensure the name is visible after printing
+        }, 100);
     });
 </script>
