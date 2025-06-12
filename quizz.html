@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz NSE4</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-3xl py-10">
+    <div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg p-6">
+      <h1 class="text-4xl font-extrabold text-center mb-8 text-blue-400">Quiz NSE4</h1>
+      <div id="quiz"></div>
+
+      <div class="flex justify-center mt-10">
+        <button id="validateBtn" class="bg-green-700 hover:bg-green-600 text-white font-semibold py-2 px-5 rounded-lg transition">Valider</button>
+      </div>
+
+      <div id="result" class="mt-10 text-center text-3xl font-bold text-green-400"></div>
+    </div>
+  </div>
+
+  <script>
+    let selectedQuestions = [];
+    let currentQuestion = 0;
+    let userAnswers = [];
+
+    function shuffleArray(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function renderQuestion(i) {
+      const q = selectedQuestions[i];
+      const isMultiple = Array.isArray(q.reponse) && q.reponse.length > 1;
+      const inputType = isMultiple ? 'checkbox' : 'radio';
+      const html = `
+        <div class="space-y-6">
+          <p class="text-xl font-semibold">${i + 1}. ${q.question}</p>
+          <div class="grid gap-3">
+            ${q.propositions.map((p, idx) => `
+              <label data-value="${p.charAt(0)}" class="choice-label flex items-start gap-3 bg-gray-800 hover:bg-gray-700 transition p-3 rounded-lg cursor-pointer">
+                <input type="${inputType}" name="q${i}" value="${p.charAt(0)}" class="hidden">
+                <span class="text-base">${p}</span>
+              </label>`).join("")}
+          </div>
+        </div>
+      `;
+      $("#quiz").html(html);
+    }
+
+    function showFeedback(i) {
+      const correctAnswers = selectedQuestions[i].reponse;
+      const userAnswersForQ = userAnswers[i] || [];
+      $(`.choice-label`).each(function() {
+        const val = $(this).data("value");
+        if (correctAnswers.includes(val)) {
+          $(this).removeClass('bg-gray-800 hover:bg-gray-700').addClass('bg-green-600');
+        } else if (userAnswersForQ.includes(val)) {
+          $(this).removeClass('bg-gray-800 hover:bg-gray-700').addClass('bg-red-600');
+        } else {
+          $(this).addClass('opacity-50');
+        }
+      });
+    }
+
+    function saveAnswer(i) {
+      const selected = $(`input[name='q${i}']:checked`).map(function() {
+        return $(this).val();
+      }).get();
+      userAnswers[i] = selected;
+    }
+
+    function evaluateAndNext() {
+      saveAnswer(currentQuestion);
+      showFeedback(currentQuestion);
+      $("#validateBtn").prop("disabled", true).addClass("opacity-50 cursor-not-allowed");
+
+      setTimeout(() => {
+        currentQuestion++;
+        if (currentQuestion < selectedQuestions.length) {
+          renderQuestion(currentQuestion);
+          $("#validateBtn").prop("disabled", false).removeClass("opacity-50 cursor-not-allowed");
+        } else {
+          evaluateQuiz();
+        }
+      }, 2000);
+    }
+
+    function evaluateQuiz() {
+      let score = 0;
+      selectedQuestions.forEach((q, i) => {
+        if (!Array.isArray(q.reponse)) return;
+        const correct = q.reponse.slice().sort().join(',');
+        const user = (userAnswers[i] || []).slice().sort().join(',');
+        if (correct === user) {
+          score++;
+        }
+      });
+      $("#quiz").html("");
+      $("#validateBtn").hide();
+      $("#result").text(`🎉 Votre score : ${score}/30`);
+    }
+
+    $(document).ready(function() {
+      $.getJSON("questions.json", function(data) {
+        selectedQuestions = shuffleArray(data).slice(0, 30);
+        renderQuestion(currentQuestion);
+      });
+
+      $("#quiz").on("click", ".choice-label", function() {
+        const input = $(this).find("input");
+        if (input.attr("type") === "radio") {
+          const name = input.attr("name");
+          $(`input[name='${name}']`).prop('checked', false);
+          $(`label[data-value]`).removeClass("ring-2 ring-blue-400");
+        }
+        input.prop("checked", !input.prop("checked"));
+        if (input.prop("checked")) {
+          $(this).addClass("ring-2 ring-blue-400");
+        } else {
+          $(this).removeClass("ring-2 ring-blue-400");
+        }
+      });
+
+      $("#validateBtn").click(function() {
+        evaluateAndNext();
+      });
+    });
+  </script>
+</body>
+</html>
