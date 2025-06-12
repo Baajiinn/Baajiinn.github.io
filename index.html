@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-gray-900 text-gray-200">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz CCNA-3 ENSA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+  <div class="w-full max-w-lg bg-gray-800 rounded-lg shadow-xl p-6 space-y-4">
+    <h1 class="text-3xl font-semibold text-center">Quiz CCNA-3 ENSA</h1>
+
+    <div
+      id="questionCard"
+      class="bg-gray-700 rounded-md p-5 min-h-[260px] flex flex-col items-center"
+    >
+      <div id="imageContainer" class="mb-4"></div>
+      <p id="question" class="text-lg leading-relaxed text-center">
+        Chargement…
+      </p>
+      <div id="options" class="mt-4 space-y-2 w-full"></div>
+      <p id="explanation" class="mt-4 text-gray-400 text-sm text-center"></p>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <button
+        id="nextBtn"
+        class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md disabled:opacity-50"
+        disabled
+      >
+        Suivante
+      </button>
+      <button
+        id="restartBtn"
+        class="px-5 py-2 bg-red-600 hover:bg-red-500 rounded-md hidden"
+      >
+        Recommencer
+      </button>
+    </div>
+
+    <p id="progress" class="text-center text-gray-400"></p>
+  </div>
+
+  <script>
+    const QUIZ_SIZE = 30;
+    const SOURCE_URL =
+      "https://itexamanswers.net/ccna-3-v7-0-final-exam-answers-full-enterprise-networking-security-and-automation.html";
+    const FETCH_URL = "https://corsproxy.io/?" + encodeURIComponent(SOURCE_URL);
+
+    // Utilise MyMemory pour traduire (gratuite, sans clé)
+    async function translateText(text) {
+      try {
+        const url =
+          "https://api.mymemory.translated.net/get?" +
+          new URLSearchParams({
+            q: text,
+            langpair: "en|fr",
+          }).toString();
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error("Échec MyMemory");
+        const data = await resp.json();
+        return data.responseData.translatedText;
+      } catch {
+        return text;
+      }
+    }
+
+    // Extrait blocs (question/options/réponse/explication/images)
+    async function fetchRawQuestions() {
+      const resp = await fetch(FETCH_URL);
+      if (!resp.ok) throw new Error("Erreur proxy CORS");
+      const html = await resp.text();
+      const container = document.createElement("div");
+      container.innerHTML = html;
+
+      // Trouve tous les nœuds <strong> dont le texte se termine par "?"
+      const strongList = Array.from(container.querySelectorAll("strong"));
+      const questionNodes = strongList.filter((el) =>
+        /^\d+\.\s+.+\?$/.test(el.innerText.trim())
+      );
+
+      const blocks = [];
+      questionNodes.forEach((strongNode, idx) => {
+        const questionText = strongNode.innerText
+          .trim()
+          .replace(/^\d+\.\s*/, "");
+        const options = [];
+        let answer = "";
+        let explanation = "";
+        const images = [];
+
+        // Parcours des éléments suivants jusqu'au prochain <strong> ou fin
+        let node = strongNode.nextElementSibling;
+        while (node && !questionNodes.includes(node)) {
+          if (node.tagName === "UL" || node.tagName === "OL") {
+            node.querySelectorAll("li").forEach((li) => {
+              const text = li.innerText.trim();
+              if (/^[A-D]\.\s/.test(text) || /^[a-d]\)\s/.test(text)) {
+                options.push(text);
+              }
+            });
+          }
+          if (node.tagName === "P" || node.tagName === "DIV") {
+            // Récupère les images dans ce paragraphe
+            node.querySelectorAll("img").forEach((img) => {
+              const src = img.getAttribute("src");
+              if (src) images.push(src);
+            });
+            const line = node.innerText.trim();
+            if (/^[A-D]\.\s/.test(line) || /^[a-d]\)\s/.test(line)) {
+              options.push(line);
+            } else if (/^Answer[:\s]/i.test(line) || /^Réponse[:\s]/i.test(line)) {
+              answer = line.replace(/^(Answer|Réponse)[:\s]*/i, "").trim();
+            } else if (
+              /^Explanation[:\s]/i.test(line) ||
+              /^Explication[:\s]/i.test(line)
+            ) {
+              explanation = line
+                .replace(/^(Explanation|Explication)[:\s]*/i, "")
+                .trim();
+            }
+          }
+          node = node.nextElementSibling;
+        }
+
+        if (options.length) {
+          blocks.push({ questionText, options, answer, explanation, images });
+        }
+      });
+
+      return blocks;
+    }
+
+    // Mélange Fisher–Yates
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    async function startQuiz() {
+      const nextBtn = document.getElementById("nextBtn");
+      const restartBtn = document.getElementById("restartBtn");
+      const qEl = document.getElementById("question");
+      const optsContainer = document.getElementById("options");
+      const explEl = document.getElementById("explanation");
+      const imgContainer = document.getElementById("imageContainer");
+      const prog = document.getElementById("progress");
+
+      nextBtn.disabled = true;
+      restartBtn.classList.add("hidden");
+      qEl.textContent = "Chargement des questions…";
+      optsContainer.innerHTML = "";
+      explEl.textContent = "";
+      imgContainer.innerHTML = "";
+
+      let allBlocks;
+      try {
+        allBlocks = await fetchRawQuestions();
+      } catch (e) {
+        qEl.textContent = "Erreur de chargement.";
+        console.error(e);
+        return;
+      }
+
+      // Si on n'a pas assez de blocs, on s'arrête
+      if (!allBlocks.length) {
+        qEl.textContent = "Aucune question trouvée.";
+        return;
+      }
+
+      // 2) Sélectionner 30 blocs au hasard (ou moins si pas assez)
+      const chosen = shuffle(allBlocks).slice(0, Math.min(QUIZ_SIZE, allBlocks.length));
+      // 3) Préparer tableau pour traductions (null = non traduit)
+      const translated = Array(chosen.length).fill(null);
+
+      let currentIndex = 0;
+
+      // 4) Lancer traduction en arrière-plan
+      chosen.forEach((blk, idx) => {
+        (async () => {
+          const qt = await translateText(blk.questionText);
+          const opts = await Promise.all(blk.options.map((o) => translateText(o)));
+          const expl = blk.explanation ? await translateText(blk.explanation) : "";
+          translated[idx] = {
+            questionText: qt,
+            options: opts,
+            answer: blk.answer,
+            explanation: expl,
+            images: blk.images,
+          };
+          // Si la question traduite correspond à celle affichée actuellement, on la réaffiche
+          if (idx === currentIndex) {
+            renderQuestion(currentIndex);
+          }
+        })();
+      });
+
+      // Fonction pour afficher la question i (texte + options + image)
+      function renderQuestion(i) {
+        const raw = chosen[i];
+        const trans = translated[i];
+        optsContainer.innerHTML = "";
+        explEl.textContent = "";
+        imgContainer.innerHTML = "";
+
+        // Affiche l'image si présente
+        const imgsToShow = trans ? trans.images : raw.images;
+        if (Array.isArray(imgsToShow) && imgsToShow.length) {
+          const imgEl = document.createElement("img");
+          imgEl.src = imgsToShow[0];
+          imgEl.alt = "Illustration question";
+          imgEl.className = "max-h-48 object-contain mb-4 rounded";
+          imgContainer.appendChild(imgEl);
+        }
+
+        // Affiche texte de la question (traduit si dispo)
+        if (trans) {
+          qEl.textContent = trans.questionText;
+        } else {
+          qEl.textContent = raw.questionText + " (traduction en cours)";
+        }
+
+        // Affiche options (traduites ou brutes)
+        const optsToShow = trans ? trans.options : raw.options;
+        optsToShow.forEach((optText, j) => {
+          const btn = document.createElement("button");
+          btn.innerText = optText;
+          btn.className =
+            "w-full text-left px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded-md";
+          btn.onclick = () => {
+            // Désactive tous les boutons d'options
+            Array.from(optsContainer.children).forEach((b) => (b.disabled = true));
+            // Trouve l'index de la bonne réponse à partir du préfixe
+            const correctPrefix = raw.answer.split(/\s/)[0];
+            const listToCheck = trans ? trans.options : raw.options;
+            const correctIndex = listToCheck.findIndex((o) =>
+              o.startsWith(correctPrefix)
+            );
+            // Colore vert la bonne option, rouge les autres
+            Array.from(optsContainer.children).forEach((b, k) => {
+              if (k === correctIndex) {
+                b.classList.remove("bg-gray-600");
+                b.classList.add("bg-green-600");
+              } else {
+                b.classList.remove("bg-gray-600");
+                b.classList.add("bg-red-600");
+              }
+            });
+            // Affiche l'explication (traduit si dispo)
+            explEl.textContent = trans
+              ? trans.explanation || "Pas d'explication."
+              : raw.explanation || "Pas d'explication.";
+            nextBtn.disabled = false;
+          };
+          optsContainer.appendChild(btn);
+        });
+
+        prog.textContent = `Question ${i + 1} sur ${chosen.length}`;
+      }
+
+      // Affiche immédiatement la première question en anglais
+      renderQuestion(0);
+      nextBtn.disabled = false;
+
+      nextBtn.onclick = () => {
+        currentIndex++;
+        nextBtn.disabled = true;
+        if (currentIndex < chosen.length) {
+          renderQuestion(currentIndex);
+          nextBtn.disabled = false;
+        } else {
+          // Fin du quiz
+          imgContainer.innerHTML = "";
+          qEl.textContent = "🎉 Quiz terminé !";
+          optsContainer.innerHTML = "";
+          explEl.textContent = "";
+          prog.textContent = `${chosen.length}/${chosen.length} complètes`;
+          nextBtn.classList.add("hidden");
+          restartBtn.classList.remove("hidden");
+        }
+      };
+
+      restartBtn.onclick = () => {
+        nextBtn.classList.remove("hidden");
+        startQuiz();
+      };
+    }
+
+    // Lancement initial
+    startQuiz().catch((err) => {
+      document.getElementById("question").textContent = "Erreur de chargement…";
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
